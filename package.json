@@ -1,8 +1,13 @@
 {
   "name": "random-indian-names",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "High-quality, syllable-based random Indian name generator for Node.js.",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "node test.js"
   },
@@ -15,7 +20,7 @@
     "faker",
     "mock-data"
   ],
-  "author": "",
+  "author": "Ashik A Jain",
   "license": "MIT",
   "type": "commonjs"
 }

@@ -20,8 +20,25 @@ console.log(names.join(", "));
 
 console.log("\n4. Error Handling Test:");
 try {
-    const names = getRandomName(5, 20); // Invalid range
-    console.log(names)
+    getRandomName(-1, 5); // Negative value
 } catch (e) {
-    console.log(`- Caught expected error: ${e.message}`);
+    console.log(`- Caught expected error (negative): ${e.message}`);
+}
+
+try {
+    getRandomName(0, 5); // Zero value
+} catch (e) {
+    console.log(`- Caught expected error (zero): ${e.message}`);
+}
+
+try {
+    getRandomName(5, 20); // Invalid range (> 15)
+} catch (e) {
+    console.log(`- Caught expected error (>15): ${e.message}`);
+}
+
+try {
+    getRandomName(10, 5); // Invalid range (min > max)
+} catch (e) {
+    console.log(`- Caught expected error (min > max): ${e.message}`);
 }

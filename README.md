@@ -37,9 +37,12 @@ console.log(getRandomName(5)); // e.g., "Vihaan"
 ## API
 
 ### `getRandomName(min, max)`
-- `min` (Number): Minimum character length (default: 3).
-- `max` (Number): Maximum character length (default: 10).
-- **Returns**: A capitalized string.
+- `min` (number, default: 3): Minimum length of the name (Max 15).
+- `max` (number, default: 10): Maximum length of the name (Max 15).
+- **Returns**: A capitalized string (e.g., "Sania").
+
+> [!NOTE]
+> For quality reasons, the module restricts names to a maximum of **15 characters**.
 
 ## License
 MIT

@@ -64,6 +64,12 @@ function getRandomName(min = 3, max = 10) {
     if (typeof min !== 'number' || typeof max !== 'number') {
         throw new Error("getRandomName requires numbers for min and max");
     }
+    if (min < 1 || max < 1) {
+        throw new Error("minimum and maximum letters must be at least 1");
+    }
+    if (min > 15 || max > 15) {
+        throw new Error("minimum and maximum letters cannot exceed 15 characters");
+    }
     if (min > max) {
         throw new Error("minimum letters cannot be greater than maximum letters");
     }
