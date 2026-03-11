@@ -5,9 +5,9 @@
 
 const syllableGraph = {
     "starts": [
-        "A", "Ad", "Ak", "Am", "An", "Ar", "As", "Av", "Bha", "Cha", "De", 
-        "Dha", "Ga", "Ha", "In", "Is", "Ja", "Ka", "Ki", "Ku", "La", "Ma", 
-        "Mo", "Na", "Ni", "Pa", "Pr", "Ra", "Ri", "Ro", "Sa", "Sh", "Si", 
+        "A", "Ad", "Ak", "Am", "An", "Ar", "As", "Av", "Bha", "Cha", "De",
+        "Dha", "Ga", "Ha", "In", "Is", "Ja", "Ka", "Ki", "Ku", "La", "Ma",
+        "Mo", "Na", "Ni", "Pa", "Pr", "Ra", "Ri", "Ro", "Sa", "Sh", "Si",
         "Su", "Ta", "Va", "Vi", "Ya", "U", "Yash"
     ],
     "transitions": {
@@ -64,8 +64,8 @@ function getRandomName(min = 3, max = 10) {
     if (typeof min !== 'number' || typeof max !== 'number') {
         throw new Error("getRandomName requires numbers for min and max");
     }
-    if (min < 1 || max < 1) {
-        throw new Error("minimum and maximum letters must be at least 1");
+    if (min < 2) {
+        throw new Error("minimum letters must be at least 2 for authentic Indian names");
     }
     if (min > 15 || max > 15) {
         throw new Error("minimum and maximum letters cannot exceed 15 characters");
@@ -73,25 +73,24 @@ function getRandomName(min = 3, max = 10) {
     if (min > max) {
         throw new Error("minimum letters cannot be greater than maximum letters");
     }
-
     let attempts = 0;
     while (attempts < 500) {
         let name = getRandom(syllableGraph.starts);
         let usedSyllables = new Set([name.toLowerCase()]);
-        
+
         // Decide target length (favoring longer if min > 5)
-        const targetLength = max > 6 ? 
-            Math.floor(Math.random() * (max - min + 1) + min) : 
+        const targetLength = max > 6 ?
+            Math.floor(Math.random() * (max - min + 1) + min) :
             (Math.random() > 0.3 ? max : Math.max(min, 4));
 
         let lastSyllable = name;
         while (name.length < targetLength) {
-            const pool = syllableGraph.transitions[lastSyllable] || 
-                         syllableGraph.transitions[name.slice(-2)] || 
-                         syllableGraph.transitions[name.slice(-1)];
-            
+            const pool = syllableGraph.transitions[lastSyllable] ||
+                syllableGraph.transitions[name.slice(-2)] ||
+                syllableGraph.transitions[name.slice(-1)];
+
             if (!pool) break;
-            
+
             // Pick a non-repetitive syllable
             let next = getRandom(pool);
             let subAttempts = 0;
@@ -118,16 +117,16 @@ function getRandomName(min = 3, max = 10) {
 
         // Clean up and normalization
         name = name.toLowerCase();
-        
+
         // Clean double vowels but PRESERVE 'ee' and 'oo' as they are common in Indian names (e.g., Deep, Jeet)
         name = name.replace(/([aeiou])\1/gi, (match) => {
             const low = match.toLowerCase();
             return (low === 'ee' || low === 'oo') ? match : match[0];
         });
-        
+
         // Remove impossible triple consonants
         name = name.replace(/([^aeiou])\1\1/gi, '$1$1');
-        
+
         // Fix "Utktk" and similar issues by preventing identical vowel-less clusters
         name = name.replace(/(tk|rt|rk)\1/gi, '$1');
 

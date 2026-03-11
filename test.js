@@ -20,15 +20,9 @@ console.log(names.join(", "));
 
 console.log("\n4. Error Handling Test:");
 try {
-    getRandomName(-1, 5); // Negative value
+    getRandomName(1, 2); // Too short
 } catch (e) {
-    console.log(`- Caught expected error (negative): ${e.message}`);
-}
-
-try {
-    getRandomName(0, 5); // Zero value
-} catch (e) {
-    console.log(`- Caught expected error (zero): ${e.message}`);
+    console.log(`- Caught expected error (too short): ${e.message}`);
 }
 
 try {
@@ -42,3 +36,4 @@ try {
 } catch (e) {
     console.log(`- Caught expected error (min > max): ${e.message}`);
 }
+console.log(getRandomName());
