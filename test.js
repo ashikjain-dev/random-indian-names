@@ -1,4 +1,4 @@
-const { getRandomName } = require('./index');
+const { getRandomName } = require('./dist/index.js');
 
 console.log("--- Random Name Generation Test ---");
 

@@ -1,14 +1,17 @@
 {
   "name": "random-indian-names",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "High-quality, syllable-based random Indian name generator for Node.js.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
-    "index.js",
+    "src",
+    "dist",
     "README.md",
     "LICENSE"
   ],
   "scripts": {
+    "build": "tsc",
     "test": "node test.js"
   },
   "keywords": [
@@ -18,9 +21,14 @@
     "syllable-graph",
     "random-names",
     "faker",
-    "mock-data"
+    "mock-data",
+    "typescript"
   ],
   "author": "Ashik A Jain",
   "license": "MIT",
-  "type": "commonjs"
+  "type": "commonjs",
+  "devDependencies": {
+    "@types/node": "^20.17.0",
+    "typescript": "^5.6.2"
+  }
 }

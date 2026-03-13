@@ -3,7 +3,16 @@
  * Syllable Graph Engine - Refined transitions with repetition guards.
  */
 
-const syllableGraph = {
+
+interface SyllableGraph {
+    starts: string[];
+    transitions: {
+        [key: string]: string[];
+    };
+    suffixes: string[];
+}
+
+const syllableGraph: SyllableGraph = {
     "starts": [
         "A", "Ad", "Ak", "Am", "An", "Ar", "As", "Av", "Bha", "Cha", "De",
         "Dha", "Ga", "Ha", "In", "Is", "Ja", "Ka", "Ki", "Ku", "La", "Ma",
@@ -55,12 +64,12 @@ const syllableGraph = {
     "suffixes": ["kumar", "endra", "deep", "jeet", "prasad", "nath", "veer", "wati", "it", "esh", "an"]
 };
 
-function getRandom(arr) {
+function getRandom(arr: string[]) {
     if (!arr || arr.length === 0) return "";
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function getRandomName(min = 3, max = 10) {
+function getRandomName(min: number = 3, max: number = 10): string {
     if (typeof min !== 'number' || typeof max !== 'number') {
         throw new Error("getRandomName requires numbers for min and max");
     }
@@ -85,7 +94,7 @@ function getRandomName(min = 3, max = 10) {
 
         let lastSyllable = name;
         while (name.length < targetLength) {
-            const pool = syllableGraph.transitions[lastSyllable] ||
+            const pool: string[] = syllableGraph.transitions[lastSyllable] ||
                 syllableGraph.transitions[name.slice(-2)] ||
                 syllableGraph.transitions[name.slice(-1)];
 
@@ -147,4 +156,4 @@ function getRandomName(min = 3, max = 10) {
     return getRandom(valid.length > 0 ? valid : ["Amit"]);
 }
 
-module.exports = { getRandomName };
+export { getRandomName };
